@@ -11,7 +11,7 @@ def scrape():
     browser = init_browser()
     listings = {}
     #url = "https://washingtondc.craigslist.org/search/hhh?max_price=1500&availabilityMode=0"
-    url="https://mars.nasa.gov/news/""
+    url="https://mars.nasa.gov/news/"
     browser.visit(url)
     html = browser.html
     soup = BeautifulSoup(html, "html.parser")
