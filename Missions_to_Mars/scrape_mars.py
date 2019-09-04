@@ -1,7 +1,22 @@
+# -*- coding: utf-8 -*-
+"""
+Created on 2019@
+@author: GB
+"""
+
 from splinter import Browser
 from bs4 import BeautifulSoup
 import pandas as pd
 import time
+import pymongo
+
+# Setup connection to mongodb
+conn = "mongodb://localhost:27017"
+client = pymongo.MongoClient(conn)
+
+# Select database and collection to use
+db = client.mars_data
+collection = db.mars_data
 
 def scrape():
     
