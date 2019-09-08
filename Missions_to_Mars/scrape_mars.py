@@ -25,7 +25,7 @@ def init_browser():
 
 def scrape_info():
     browser=init_browser()
-    #return_dict = {}
+    mars_dict = {}
     
     #executable_path = {'executable_path': 'chromedriver.exe'}
     #browser = Browser('chrome', **executable_path, headless=False)
@@ -97,15 +97,15 @@ def scrape_info():
     """
     Mars Hemispheres
     """
+    
   # Store data in a dictionary
     mars_data = {
        "news_title": news_title,
        "news_p": news_p,
        "featured_image_url": featured_image_url,
-       #"featured_img_title": featured_img_title,
        "mars_weather": mars_weather,
        "html_table":html_table,
-       #"hemisphere_image_urls":hemisphere_image_urls
+       "hemisphere_image_urls":hemisphere_image_urls
    }
 
     browser.quit()
