@@ -88,11 +88,13 @@ def scrape_info():
 
     tables = pd.read_html(url3)
     df = tables[0]
-    df.columns = ["description", "value"]
-    df.set_index('description', inplace=True)
+    df.columns = ["Parameter", "Mars", "Earth"]
+    df.set_index('Parameter', inplace=True)
     
-    mars_fact_dict = {"mars_fact":df.to_html()}
-    mars_dict.update(mars_fact_dict)
+    #mars_fact_dict = {"mars_fact":df.to_html()}
+    mars_fact_dict = df.to_html()
+    #mars_dict.update(mars_fact_dict)
+    #mars_dict.update(mars_fact)=mars_fact_dict
     
     """
     Mars Hemispheres
@@ -104,8 +106,9 @@ def scrape_info():
        "news_p": news_p,
        "featured_image_url": featured_image_url,
        "mars_weather": mars_weather,
-       "html_table":html_table,
-       "hemisphere_image_urls":hemisphere_image_urls
+       "mars_fact": mars_fact_dict,
+       #"html_table":html_table,
+       #"hemisphere_image_urls":hemisphere_image_urls
    }
 
     browser.quit()
