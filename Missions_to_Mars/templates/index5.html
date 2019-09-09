@@ -29,7 +29,8 @@
 				<h3>Featured Mars Image: {{ mars_dict.featured_img_title }}</h3>
 				<img src="{{ mars_dict.featured_image_url | default('static/images/error.png')}}" style="width:100%" class="img-responsive"
 					style="padding-right: 20px; padding left: 20px;" alt="featured_image"><br />
-				
+				<!-- <a href="{{ mars_dict.featured_image_url}}">{{ mars_dict.featured_image_url}}</a>
+			<p> {{ mars_dict.featured_image_url}} </p> -->
 			</div>
 			<div class="col-xs-4 col-md-4">
 				<div class="col-xs-auto col-md-auto">
@@ -57,8 +58,8 @@
 ​
 		<br>
 		<br>
+​​
 ​
-
 		<br>
 ​
 ​
@@ -66,14 +67,14 @@
 		<br>
 		<div class="row">
 			<div class="col-xs-6 col-md-6">
-				<img src="{{ mars_dict.hemisphere_image_urls[3]['img_url'] | default('static/images/error.png')}}" style="width:100%" class="img-responsive"
+				<img src="{{mars_dict.hemisphere_image_urls[3]['img_url'] | default('static/images/error.png')}}" style="width:100%" class="img-responsive"
 					style="padding-right: 20px; padding left: 20px;"
 					alt=" {{mars_dict.hemisphere_image_urls[3]['title']}} " />
 				<h5>{{mars_dict.hemisphere_image_urls[3]['title']}}</h5>
 ​
 			</div>
 			<div class="col-xs-6 col-md-6">
-				<img src="{{ mars_dict.hemisphere_image_urls[0]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+				<img src="{{mars_dict.hemisphere_image_urls[0]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
 					style="padding-right: 20px; padding left: 20px;"
 					alt=" {{mars_dict.hemisphere_image_urls[0]['title'] }} " />
 				<h5>{{mars_dict.hemisphere_image_urls[0]['title']}}</h5>
@@ -99,10 +100,24 @@
 ​
 ​
 ​
+	
 ​
 	</div>
-
-	
+	<!-- 
+ <div>
+ <pre>{{ mars_dict.html_table }}</pre>
+ </div>
+-->
+	<p> THIS IS WHERE I AM TRYING TO READ IN TABLE </p>
+​
+	<table id="scrape_table"></table>
+​
+​
+	<script>
+​
+​
+		document.getElementById("scrape_table").innerHTML = {{ mars_dict.html_table }};
+	</script>
 ​
 ​
 	<br>
@@ -111,7 +126,3 @@
 </body>
 ​
 </html>
-
-
-
-
