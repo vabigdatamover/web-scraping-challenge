@@ -48,12 +48,74 @@
               <br>
               <h4>Mars Facts</h4>
                {{mars_dict.mars_fact | safe }}
+
+               <style>
+                  table,
+                  th,
+                  td {
+                    border: 1px solid black;
+                  }
+      ​
+                  th,
+                  td {
+                    padding: 3px;
+                  }
+                </style>
+                {{ mars_dict.html_table | safe}}
             </div>
           </div>  
         </div>
 
       </div>
-
+      
+      <br>
+      <!--Table Section-->
+      <p> Test </p>
+      ​
+        <table id="scrape_table"></table>
+      ​ {{ mars_dict.html_table | safe}}
+      ​
+        <script>
+      ​
+      ​
+          document.getElementById("scrape_table").innerHTML = {{ mars_dict.html_table }};
+        </script>
+      ​
+      ​   <!--Mars Hemispheres pics-->
+          <h3 class="text-center">Mars Hemispheres</h3>
+          <br>
+          <div class="row">
+            <div class="col-xs-6 col-md-6">
+              <img src="{{mars_dict.hemisphere_image_urls[3]['img_url'] | default('static/images/error.png')}}" style="width:100%" class="img-responsive"
+                style="padding-right: 20px; padding left: 20px;"
+                alt=" {{mars_dict.hemisphere_image_urls[3]['title']}} " />
+              <h5>{{mars_dict.hemisphere_image_urls[3]['title']}}</h5>
+      ​
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <img src="{{mars_dict.hemisphere_image_urls[0]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+                style="padding-right: 20px; padding left: 20px;"
+                alt=" {{mars_dict.hemisphere_image_urls[0]['title'] }} " />
+              <h5>{{mars_dict.hemisphere_image_urls[0]['title']}}</h5>
+            </div>
+          </div>
+      ​
+          <div class="row">
+            <div class="col-xs-6 col-md-6">
+              <img src="{{ mars_dict.hemisphere_image_urls[1]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+                style="padding-right: 20px; padding left: 20px;"
+                alt=" {{mars_dict.hemisphere_image_urls[1]['title']}} " />
+              <h5>{{mars_dict.hemisphere_image_urls[1]['title']}}</h5>
+      ​
+            </div>
+            <div class="col-xs-6 col-md-6">
+              <img src="{{ mars_dict.hemisphere_image_urls[2]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+                style="padding-right: 20px; padding left: 20px;"
+                alt=" {{mars_dict.hemisphere_image_urls[2]['title']}} " />
+              <h5>{{mars_dict.hemisphere_image_urls[2]['title']}}</h5>
+            </div>
+          </div>
+      ​
       
 
   </div>
