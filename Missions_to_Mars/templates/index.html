@@ -1,124 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
-
+​
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Mission to Mars</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Mission to Mars</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+​
+	<!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 </head>
-
+​
 <body>
-  <div class="container-fluid">
-    <div class="jumbotron text-center">
-      <h1>Mission to Mars</h1>
-      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
-    </div>
-
-      <div class="row">
-        <div class="col-md-12">
-          <h3>Latest Mars News</h3>
-          <h4> {{mars_dict.news_title}}</h4>
-          <p> {{ mars_dict.news_p}} </p>
-        </div>
-      </div>
-
-      <div class="row">
-
-        <div class="col-xs-auto">
-          <h2>Featured Mars Image</h2>
-          <img src="{{mars_dict.featured_image_url}}" >
-        </div>
-        
-        <br>
-        <div class="col-md-4">
-          <div class="row weather-box">
-            <div class="col-md-12">
-              <div class="current-weather">
-                <h4> Current Weather on Mars</h4>
-                <p>
-                  {{mars_dict.mars_weather }}
-                </p>
-              </div>  
-            </div>
-            </div>
-
-            <div class="col-md-12">
-              <br>
-              <h4>Mars Facts</h4>
-               {{mars_dict.mars_fact | safe }}
-
-               <style>
-                  table,
-                  th,
-                  td {
-                    border: 1px solid black;
-                  }
-      ​
-                  th,
-                  td {
-                    padding: 3px;
-                  }
-                </style>
-                {{ mars_dict.html_table | safe}}
-            </div>
-          </div>  
-        </div>
-
-      </div>
-      
-      <br>
-      <!--Table Section-->
-      <p> Test </p>
-      ​
-        <table id="scrape_table"></table>
-      ​ {{ mars_dict.html_table | safe}}
-      ​
-        <script>
-      ​
-      ​
-          document.getElementById("scrape_table").innerHTML = {{ mars_dict.html_table }};
-        </script>
-      ​
-      ​   <!--Mars Hemispheres pics-->
-          <h3 class="text-center">Mars Hemispheres</h3>
-          <br>
-          <div class="row">
-            <div class="col-xs-6 col-md-6">
-              <img src="{{mars_dict.hemisphere_image_urls[3]['img_url'] | default('static/images/error.png')}}" style="width:100%" class="img-responsive"
-                style="padding-right: 20px; padding left: 20px;"
-                alt=" {{mars_dict.hemisphere_image_urls[3]['title']}} " />
-              <h5>{{mars_dict.hemisphere_image_urls[3]['title']}}</h5>
-      ​
-            </div>
-            <div class="col-xs-6 col-md-6">
-              <img src="{{mars_dict.hemisphere_image_urls[0]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
-                style="padding-right: 20px; padding left: 20px;"
-                alt=" {{mars_dict.hemisphere_image_urls[0]['title'] }} " />
-              <h5>{{mars_dict.hemisphere_image_urls[0]['title']}}</h5>
-            </div>
-          </div>
-      ​
-          <div class="row">
-            <div class="col-xs-6 col-md-6">
-              <img src="{{ mars_dict.hemisphere_image_urls[1]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
-                style="padding-right: 20px; padding left: 20px;"
-                alt=" {{mars_dict.hemisphere_image_urls[1]['title']}} " />
-              <h5>{{mars_dict.hemisphere_image_urls[1]['title']}}</h5>
-      ​
-            </div>
-            <div class="col-xs-6 col-md-6">
-              <img src="{{ mars_dict.hemisphere_image_urls[2]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
-                style="padding-right: 20px; padding left: 20px;"
-                alt=" {{mars_dict.hemisphere_image_urls[2]['title']}} " />
-              <h5>{{mars_dict.hemisphere_image_urls[2]['title']}}</h5>
-            </div>
-          </div>
-      ​
-      
-
-  </div>
+	<div class="container-fluid">
+		<div class="jumbotron text-center">
+			<h1>Mission to Mars</h1>
+			<p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+		</div>
+​
+​
+		<h3>Latest Mars News</h3>
+		<p><span style="font-weight:bold">{{ mars_dict.news_title }}</span></p>
+		<p>{{ mars_dict.news_p }}</p>
+​
+		<div class="row">
+			<div class="col-xs-8 col-md-8">
+				<h3>Featured Mars Image: {{ mars_dict.featured_img_title }}</h3>
+				<img src="{{ mars_dict.featured_image_url | default('static/images/error.png')}}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;" alt="featured_image"><br />
+				<!-- <a href="{{ mars_dict.featured_image_url}}">{{ mars_dict.featured_image_url}}</a>
+			<p> {{ mars_dict.featured_image_url}} </p> -->
+			</div>
+			<div class="col-xs-4 col-md-4">
+				<div class="col-xs-auto col-md-auto">
+					<h3>Current Weather on Mars</h3>
+					<p> {{ mars_dict.mars_weather }} </p>
+				</div>
+				<div class="col-xs-auto col-md-auto">
+					<h3>Mars Facts</h3>
+					<style>
+						table,
+						th,
+						td {
+							border: 1px solid black;
+						}
+​
+						th,
+						td {
+							padding: 3px;
+						}
+					</style>
+					{{ mars_dict.html_table | safe}}
+				</div>
+			</div>
+		</div>
+​
+		<br>
+		<br>
+​​
+​
+		<br>
+​
+​
+		<h3 class="text-center">Mars Hemispheres</h3>
+		<br>
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<img src="{{mars_dict.hemisphere_image_urls[3]['img_url'] | default('static/images/error.png')}}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;"
+					alt=" {{mars_dict.hemisphere_image_urls[3]['title']}} " />
+				<h5>{{mars_dict.hemisphere_image_urls[3]['title']}}</h5>
+​
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<img src="{{mars_dict.hemisphere_image_urls[0]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;"
+					alt=" {{mars_dict.hemisphere_image_urls[0]['title'] }} " />
+				<h5>{{mars_dict.hemisphere_image_urls[0]['title']}}</h5>
+			</div>
+		</div>
+​
+		<div class="row">
+			<div class="col-xs-6 col-md-6">
+				<img src="{{ mars_dict.hemisphere_image_urls[1]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;"
+					alt=" {{mars_dict.hemisphere_image_urls[1]['title']}} " />
+				<h5>{{mars_dict.hemisphere_image_urls[1]['title']}}</h5>
+​
+			</div>
+			<div class="col-xs-6 col-md-6">
+				<img src="{{ mars_dict.hemisphere_image_urls[2]['img_url'] | default('static/images/error.png') }}" style="width:100%" class="img-responsive"
+					style="padding-right: 20px; padding left: 20px;"
+					alt=" {{mars_dict.hemisphere_image_urls[2]['title']}} " />
+				<h5>{{mars_dict.hemisphere_image_urls[2]['title']}}</h5>
+			</div>
+		</div>
+​
+​
+​
+​
+	
+​
+	</div>
+	<!-- 
+ <div>
+ <pre>{{ mars_dict.html_table }}</pre>
+ </div>
+-->
+	<p> THIS IS WHERE I AM TRYING TO READ IN TABLE </p>
+​
+	<table id="scrape_table"></table>
+​
+​
+	<script>
+​
+​
+		document.getElementById("scrape_table").innerHTML = {{ mars_dict.html_table }};
+	</script>
+​
+​
+	<br>
+	<br>
+​
 </body>
-
+​
 </html>

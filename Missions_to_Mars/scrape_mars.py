@@ -108,41 +108,59 @@ def scrape_info():
     """
     Mars Hemispheres
     """
-    ##https://astrogeology.usgs.gov/maps/mars-viking-hemisphere-point-perspectives
+    url = "https://astrogeology.usgs.gov/maps/mars-viking-hemisphere-point-perspectives"    
+    browser.visit(url)
+    time.sleep(2)    
+    
+    img_list =[]
+    img_url_list = []
+    title_list = []
+    hemi=2
+    count=1
+    x=0
+    kiki=[]
 
-    url4 = 'https://astrogeology.usgs.gov/maps/mars-viking-hemisphere-point-perspectives'
-    browser.visit(url4)
-    time.sleep(1)
+#    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    url = "https://astrogeology.usgs.gov/maps/mars-viking-hemisphere-point-perspectives"    
+#    xpath = ('//*[@id="product-section"]/div[2]/div[' + str(hemi) +']/div/a/h3')
+    xpath = ('//*[@id="publish"]/div[1]/div[1]/div[4]/div/a[' + str(hemi) +']/div/h3')    
+#              //*[@id="publish"]/div[1]/div[1]/div[4]/div/a[4]/div/h3
+#              //*[@id="publish"]/div[1]/div[1]/div[4]/div/a[6]/div/h3
+#              //*[@id="publish"]/div[1]/div[1]/div[4]/div/a[8]/div/h3
+    while count < 5:
+        browser.visit(url)
 
-    html = browser.html
-    soup = BeautifulSoup(html, 'html.parser')
+        hemi_name = browser.find_by_xpath(xpath).text
+        title_list.append(hemi_name)
+        results = browser.find_by_xpath(xpath)
+
+        img = results[0]
+        img.click()
+        time.sleep(2)
+
+        # Scrape page into Soup
+        html = browser.html
+        soup = BeautifulSoup(html, "html.parser")
+        img_desc = soup.find('div', id="wide-image")
+        img_src = img_desc.find('div',class_='downloads')
+        image = img_src.find('a')
+        if image.has_attr('href'):
+            target_img = image.attrs['href']
+        img_url_list.append(target_img)
+
+        hemi+=2
+#        xpath = ('//*[@id="product-section"]/div[2]/div[' + str(hemi) +']/div/a/h3')
+        xpath = ('//*[@id="publish"]/div[1]/div[1]/div[4]/div/a[' + str(hemi) +']/div/h3')  
+        count+=1
+        x+=1
     
     hemisphere_image_urls = []
-    
-    hemis_titles = soup.find_all('h3')
-    
-    for i in range(len(hemis_titles)):
-        
-        hemis_title = hemis_titles[i].text
-        
-        hemis_images = browser.find_by_tag('h3')
-        hemis_images[i].click()
-        time.sleep(1)
-
-        html = browser.html
-        soup = BeautifulSoup(html, 'html.parser')
-        
-        img_url = soup.find('img', class_='wide-image')['src']
-        img_url = "https://astrogeology.usgs.gov" + img_url
-        
-        hemis_dict = {"title": hemis_title, "img_url":img_url}
-        hemisphere_image_urls.append(hemis_dict)
-                        
-        browser.back()
-    
-    mars_hemispheres_dict = {"mars_hemispheres_dict":hemisphere_image_urls}
-    
-    mars_dict.update(mars_hemispheres_dict)
+    h=0
+    for items in title_list:
+        if h < 4:
+            dict = {"title": title_list[h], "img_url": img_url_list[h]}
+            hemisphere_image_urls.append(dict)
+            h+=1
     
     
   # Store data in a dictionary
