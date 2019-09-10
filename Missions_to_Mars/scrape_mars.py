@@ -70,9 +70,9 @@ def scrape_info():
     html = browser.html
     soup = BeautifulSoup(html, 'html.parser')
     
-    tweet_text_container = soup.find('div', class_='js-tweet-text-container')
-    mars_weather = tweet_text_container.p.text 
-
+    tweet_text_container = soup.find_all('div', class_='js-tweet-text-container')
+     
+    print(tweet_text_container)
     # Loop through latest tweets and find the tweet that has weather information
     for tweet in tweet_text_container: 
         mars_weather = tweet.find('p').text
