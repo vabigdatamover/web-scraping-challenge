@@ -72,6 +72,15 @@ def scrape_info():
     
     tweet_text_container = soup.find('div', class_='js-tweet-text-container')
     mars_weather = tweet_text_container.p.text 
+
+    # Loop through latest tweets and find the tweet that has weather information
+    for tweet in tweet_text_container: 
+        mars_weather = tweet.find('p').text
+        if 'sol' and 'pressure' in mars_weather:
+            #print(mars_weather)
+            break
+        else: 
+            pass
     
     """
     Mars Fact
@@ -92,7 +101,7 @@ def scrape_info():
 
 
     """
-    Mars Fact Second Version
+    Mars Fact
     """
     # Visit the following URL
     url = r"https://space-facts.com/mars/"
