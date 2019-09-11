@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Created 2019
 Author: GB
@@ -27,21 +26,13 @@ def home():
 # Route that will trigger the scrape function
 @app.route("/scrape")
 def scrape():
-    #mars=mongo.db.mars_data
+    
     # Run the scrape function
     mars_data=scrape_mars.scrape_info()
-    # Update the Mongo database using update and upsert=True
+    
     # Update the Mongo database using update and upsert=True
     mongo.db.collection.update({}, mars_data, upsert=True)
-    #mars.update({}, mars_data, upsert=True)
-    #return "Scraping Successful"
-
-    # Run the scrape function
-    #scrape_mars_data = scrape_mars.scrape()
-
-    # Update the Mongo database using update and upsert=True
-    #mongo.db.collection.update({}, scrape_mars_data, upsert=True)
-
+    
     # Redirect back to home page
     return redirect("/")
 
